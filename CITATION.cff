@@ -1,0 +1,62 @@
+cff-version: 1.2.0
+message: >-
+  If you use HYACDCSIM, please cite the software and the two publications
+  listed in the references below.
+title: HYACDCSIM
+type: software
+authors:
+  - family-names: Renedo
+    given-names: Javier
+  - family-names: Prieto
+    given-names: Carlos
+  - family-names: Rezaeian-Marjani
+    given-names: Saeed
+  - family-names: Sigrist
+    given-names: Lukas
+license: GPL-3.0-only
+keywords:
+  - hybrid AC/DC power systems
+  - VSC-HVDC
+  - power-flow calculation
+  - dynamic simulation
+  - cascading failures
+  - PSS/E
+references:
+  - type: article
+    title: Dynamic Cascading Simulations of Hybrid AC/DC Power Systems in PSS/E
+    authors:
+      - family-names: Rezaeian-Marjani
+        given-names: Saeed
+      - family-names: Sigrist
+        given-names: Lukas
+      - family-names: García-Cerrada
+        given-names: Aurelio
+    journal: Energies
+    volume: '19'
+    issue: '7'
+    year: 2026
+    doi: 10.3390/en19071611
+    url: https://doi.org/10.3390/en19071611
+  - type: conference-paper
+    title: >-
+      Development of a PSS/E tool for power-flow calculation and dynamic
+      simulation of VSC-HVDC multi-terminal systems
+    authors:
+      - family-names: Renedo
+        given-names: Javier
+      - family-names: García-Cerrada
+        given-names: Aurelio
+      - family-names: Rouco
+        given-names: Luis
+      - family-names: Sigrist
+        given-names: Lukas
+      - family-names: Egido
+        given-names: Ignacio
+      - family-names: Sanz Verdugo
+        given-names: Silvia
+    conference: 13th IET International Conference on AC and DC Power Transmission (ACDC 2017)
+    year: 2017
+    start: 1
+    end: 6
+    doi: 10.1049/cp.2017.0060
+    url: https://doi.org/10.1049/cp.2017.0060
