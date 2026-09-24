@@ -2,6 +2,8 @@
 
 HYACDCSIM is a research software tool developed and owned by Universidad Pontificia Comillas.
 
+![alt text](HYACDCSIM.jpg)
+
 The principal author is Javier Renedo. The main contributors are Carlos Prieto, Saeed Rezaeian-Marjani, and Lukas Sigrist.
 
 HYACDCSIM (Hybrid AC/DC system simulator) extends PSS/E with steady-state and dynamic models of multi-terminal DC (MTDC) systems, so that hybrid AC/DC power flows and electromechanical simulations can be run on existing AC cases. A detailed description is given in the [user manual](Usermanual/HY_ACDC_SIM_usermanual.pdf).
