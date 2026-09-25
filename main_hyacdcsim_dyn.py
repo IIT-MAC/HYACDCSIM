@@ -19,10 +19,11 @@ import numpy as np
 
 # file name and paths
 str_pathinputfiles = r"C:\Users\lsigrist\OneDrive - Universidad Pontificia Comillas\PSSE\Tools\HYACDCSIM\Input\KundurDC" # Path
+str_pathdllfiles = r"C:\Users\lsigrist\OneDrive - Universidad Pontificia Comillas\PSSE\Tools\HYACDCSIM\Input\DLL" # Path
 str_pathsimfiles = r"C:\Users\lsigrist\OneDrive - Universidad Pontificia Comillas\PSSE\Tools\HYACDCSIM\Simulation\KundurDC"  # Path
 str_lffile = r"kundur32_noAC_MTDCg.sav" # initial AC load flow"
-str_dyrfile = r"kundur_MTDCg_VSCDRO.dyr" # initial AC load flow"
-str_dllfile = r"MTDCDyn.dll"
+str_dyrfile = r"kundur_MTDCg_VSCDRO.dyr" # dyr file with VSCDRO
+str_dllfile = r"MTDC.dll"
 
 # Solver parameters
 TSTEP = 0.001
@@ -37,7 +38,7 @@ TFINAL = 12
 # ------------
 str_pathlffile = os.path.join(str_pathinputfiles, str_lffile)
 str_pathdyrfile = os.path.join(str_pathinputfiles, str_dyrfile)
-str_pathdllfile = os.path.join(str_pathsimfiles, str_dllfile)
+str_pathdllfile = os.path.join(str_pathdllfiles, str_dllfile)
 str_pathoutfile = os.path.join(str_pathsimfiles, r"output.out")
 str_pathconecfile = os.path.join(str_pathsimfiles, r"conec")
 str_pathconetfile = os.path.join(str_pathsimfiles, r"conet")
@@ -46,7 +47,6 @@ str_pathcompilefile = os.path.join(str_pathsimfiles, r"compile")
 # Set working directory to the simulation folder,
 # where the DLL, Fortran-related files, and auxiliary .txt files are located
 os.chdir(str_pathsimfiles)
-print("Current Working Directory:", os.getcwd())
 
 # ----------
 # Simulation

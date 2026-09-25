@@ -151,7 +151,7 @@ CHANNEL   62 WITH IDENTIFIER "UDC1" ADDED
 CHANNEL   63 WITH IDENTIFIER "UDC2" ADDED
 
 CHANNEL   64 WITH IDENTIFIER "UDC3" ADDED
-ibrary added:C:\Users\lsigrist\OneDrive - Universidad Pontificia Comillas\PSSE\Tools\HYACDCSIM\Simulation\KundurDC\MTDCDyn.dll
+ibrary added:C:\Users\lsigrist\OneDrive - Universidad Pontificia Comillas\PSSE\Tools\HYACDCSIM\Input\DLL\MTDC.dll
 
 14 diagonal and 12 off-diagonal elements
 VSCGFL - CASE 1: Converter  1  at bus  12  with id 14 initialized.
@@ -175,7 +175,7 @@ SPWDRD - CASE 1: MTDC at AC bus  15  with id 14 initialized.
 DDCGRD - CASE 1: DC grid at AC bus  12  with id 14 initialized.
 DDCGRD - CASE 1: DC grid at AC bus  14  with id 14 initialized.
 
-    PTI INTERACTIVE POWER SYSTEM SIMULATOR--PSS(R)E     WED, SEP 09 2026  16:03
+    PTI INTERACTIVE POWER SYSTEM SIMULATOR--PSS(R)E     FRI, SEP 25 2026  14:04
  TWO AREA MULTI-MACHINE TEST SYSTEM
 
 
