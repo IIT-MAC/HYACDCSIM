@@ -15,10 +15,10 @@ from _PyModules import module_protection
 str_savfile = r"IEEE_14_39.sav" # case study file - static data
 str_dyrfile = r"IEEE_14_39.dyr" # case study file - dynamic data
 str_pathinputfiles = r"C:\Users\lsigrist\OneDrive - Universidad Pontificia Comillas\PSSE\Tools\HYACDCSIM\Input\IEEE_14_39" # Path
-str_lineprotection = r"Line_Relay_Data.xlsx" # Path to the input line protection devices data Excel file
-str_loadprotection = r"Load_Relay_Data.xlsx" # Path to the input load protection devices data Excel file
-str_machineprotection = r"Machine_Relay_Data.xlsx" # Path to the input machine protection devices data Excel file
-str_miscellaneousprotection = r"Miscellaneous_Relay_Data.xlsx" # Path to the input miscellaneous protection devices data Excel file
+str_lineprotection = r"Line_Relay_Data.xls" # Path to the input line protection devices data Excel file
+str_loadprotection = r"Load_Relay_Data.xls" # Path to the input load protection devices data Excel file
+str_machineprotection = r"Machine_Relay_Data.xls" # Path to the input machine protection devices data Excel file
+str_miscellaneousprotection = r"Miscellaneous_Relay_Data.xls" # Path to the input miscellaneous protection devices data Excel file
 
 # protection devices data paths
 str_path4dynamics = str_pathinputfiles # 
@@ -40,9 +40,9 @@ str_pathrawfileprotection = str_pathsavfileprotection[:-4] + r".raw"
 str_pathdyrfileprotection = str_pathdyrfileorig[:-4] + r"_included_protection_devices.dyr" 
 
 # open PSS/e file
-psspy.case(str_savfileorig)
+psspy.case(str_pathsavfileorig)
 SbaseMVA = psspy.sysmva()
-psspy.dyre_new([1,1,1,1],str_dyrfileorig,"","","")
+psspy.dyre_new([1,1,1,1],str_pathdyrfileorig,"","","")
 
 # Line_Relay_Model 
 Line_Relay_Model_dict = module_protection.get_sheets_with_data(str_pathlineprotection)

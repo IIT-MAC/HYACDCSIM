@@ -29,12 +29,23 @@ HYACDCSIM (Hybrid AC/DC system simulator) extends PSS/E with steady-state and dy
   - `SPWDRD` — active-power-related supplementary control (exciter-type): distributed DC-voltage droop, frequency droop, time-optimal/Lyapunov control and synthetic inertia.
   - `SQWDRD` — reactive-power-related supplementary control (stabilizer-type): AC-voltage control and frequency-based power-oscillation damper.
   - `WDELAY` — communication delays between VSC stations for wide-area controls, constant or randomly varying according to a triangular density function (second-order Padé approximation).
+- Scripted set-up of the dynamic simulation: model conversion, solver parameters, standard and user-model output channels (model `STATE` and `VAR` variables), application of the disturbance, and plotting of the results.
+
+**Protection modelling for cascading simulations**
+
+- Automatic set-up of protection devices on an existing case from Excel data sheets, so that cascading events can be simulated. Each relay type is read from a sheet named after the corresponding PSS/E model, and only non-empty sheets are processed.
+- Supported device classes:
+  - Line relays: `CIROS1`, `DISTR1`, `DPDTR1`, `RXR1`, `SCGAP2`, `SLLP1`, `SLNOS1`, `SLYPN1` and `TIOCR1`, added at both ends of the branch. For `TIOCR1`, the pick-up current is scaled with the branch rating and the operating times of the four stages are either taken from the data sheet or computed from the inverse-time characteristic defined in the companion `TIOCR1-CHR` sheet.
+  - Load relays: `DLSHxx`, `LDS3xx`, `LDSHxx`, `LDSTxx`, `LVS3xx`, `LVSHxx` and `UVUFxxU1`, where the `xx` placeholder is replaced by the tripping-action suffix given per row (`BL`, `OW`, `ZN`, `AR`, `AL`).
+  - Machine relays: `LOEXR1T`, plus the user-written models `MCREPWU1`, `NRCGP3U` and `VPERHZU1`, which are appended to the dynamic file as `USRMDL` records.
+  - Miscellaneous relays: `FRQxxxx` and `VTGxxxx` (frequency and voltage relays), added as CCT/MSCO models with sequential numbering.
+- The case including the protection devices is written back as `<case>_included_protection_devices.sav`, `.raw` and `.dyr`, and the dynamic file is finally re-read and sorted.
 
 ## Running the tool
 
-The tool is run in two stages.
+The tool is driven by three main scripts, located at the top level of the repository next to the folders described below. Each of them has a user-defined input block at the top that must be adapted to the case under study.
 
-**1. AC/DC power flow and generation of the dynamic data** — run [main_hyacdcsim.py](main_hyacdcsim.py). Before executing it, adapt the user-defined input block at the top of the file:
+**1. AC/DC power flow and generation of the dynamic data** — [main_hyacdcsim.py](main_hyacdcsim.py):
 
 - `str_lffile`, `str_dyrfile` — the initial AC power flow (`.sav`) and dynamic (`.dyr`) files of the case under study.
 - `str_MTDCdatafile` — the Excel file defining the MTDC systems (`define_grids_mtdc.xls`).
@@ -53,20 +64,35 @@ The MTDC systems themselves are defined in the Excel file, in which each DC netw
 
 Note that `Cdc` aggregates the converter capacitance and half of the capacitances of the branches connected to the VSC.
 
-**2. Dynamic simulation** — the generated `.txt` files and the updated `.dyr` file are placed in the simulation folder of the case, together with the compiled DLL of the user-written models. The `.dyr` file must then be adapted to set appropriate parameter values for the user-written models; the parameter lists (CON, ICON, STATE) and the `.dyr` record format of each model are documented in the user manual. [Simulation/main_runsimulation.py](Simulation/main_runsimulation.py) shows how the simulation is set up and run from Python.
+**2. Dynamic simulation** — [main_hyacdcsim_dyn.py](main_hyacdcsim_dyn.py). It runs the power flow, converts generators and loads, loads the `.dyr` file and the DLL of the user-written models, defines the output channels, applies the disturbance and plots the results:
 
-The repository is organised around the folders expected by the tool, with `main_hyacdcsim.py` at the same level:
+- `str_pathinputfiles`, `str_pathdllfiles`, `str_pathsimfiles` — the input folder of the case, the folder containing the DLL, and the simulation folder. The script changes the working directory to the simulation folder, where the automatically generated `.txt` files must be located.
+- `str_lffile`, `str_dyrfile`, `str_dllfile` — the power flow of the AC/DC case, the `.dyr` file including the MTDC models, and the DLL of the user-written models.
+- `TSTEP`, `TYSLACCFAC`, `TYSLTOL`, `TYSLMAXITER` — simulation time step and network-solution parameters.
+- `TINI`, `TFINAL` — the instant at which the disturbance is applied and the final simulation time.
+
+Before running it, the `.dyr` file generated in stage 1 must be adapted to set appropriate parameter values for the user-written models; the parameter lists (CON, ICON, STATE) and the `.dyr` record format of each model are documented in the user manual. The channel output file and the figures are written to the simulation folder of the case.
+
+**3. Protection devices (optional)** — [main_hyacdcsim_protection.py](main_hyacdcsim_protection.py) adds protection devices to a case, either a purely AC case or an AC/DC case built in stage 1, and writes the resulting `.sav`, `.raw` and `.dyr` files:
+
+- `str_savfile`, `str_dyrfile`, `str_pathinputfiles` — the static and dynamic files of the case and the folder containing them.
+- `str_lineprotection`, `str_loadprotection`, `str_machineprotection`, `str_miscellaneousprotection` — the Excel files with the data of the line, load, machine and miscellaneous protection devices.
+
+The resulting files, named `<case>_included_protection_devices.*`, can then be used in stage 2.
+
+The repository is organised around the following folders, with the three main scripts at the same level:
 
 - [_ForUserModels/](_ForUserModels/) — source of the user-written dynamic models.
-- [_PyModules/](_PyModules/) — `module_acdc.py` (set-up and solution of the sequential AC/DC power flow, results display, generation of the dynamic data files) and `module_dclf.py` (DC power flow and DC-slack iteration).
-- [Input/](Input/) — one subfolder per case, with the initial `.sav` and `.dyr` files and the MTDC definition file.
-- [Simulation/](Simulation/) — one subfolder per case, with the compiled DLL of the user-written models and the automatically generated `data_Buses_base.txt`, `data_Lines_base.txt`, `data_acdcbus.txt`, `data_Ac.txt` and `data_Ydc.txt`. The DLL and the `.txt` files must be located in the same folder.
+- [_PyModules/](_PyModules/) — `module_acdc.py` (set-up and solution of the sequential AC/DC power flow, results display, generation of the dynamic data files), `module_dclf.py` (DC power flow and DC-slack iteration) and `module_protection.py` (reading of the protection data sheets and addition of the relay models to the case).
+- [Input/](Input/) — one subfolder per case, with the initial `.sav` and `.dyr` files, the MTDC definition file and, where applicable, the protection data files. The [Input/DLL/](Input/DLL/) subfolder contains the compiled DLL of the user-written models.
+- [Simulation/](Simulation/) — one subfolder per case, with the automatically generated `data_Buses_base.txt`, `data_Lines_base.txt`, `data_acdcbus.txt`, `data_Ac.txt` and `data_Ydc.txt`, and with the results of the dynamic simulations (channel output file and figures). The simulation is run from this folder, so that the `.txt` files are found by the user-written models.
 
 ## Requirements
 
 - PSS/E version 34, which runs on Python 2.7 (32 bit).
-- A NumPy package compatible with that Python distribution, installed from `\Python27\Scripts` with `pip install <package name>`.
+- Python packages compatible with that distribution: NumPy, pandas (reading of the Excel input files) and Matplotlib (plotting of the simulation results). They are installed from `\Python27\Scripts` with `pip install <package name>`. The `dyntools` package used to read the channel output file is provided with PSS/E.
 - An Intel Visual Fortran compiler compatible with PSS/E 34, needed to compile the user-written models in [_ForUserModels/](_ForUserModels/) into the DLL used by the dynamic simulations.
+
 
 ## Citation
 

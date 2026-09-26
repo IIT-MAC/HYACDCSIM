@@ -169,7 +169,7 @@ def add_Load_Relay_Model(str_loadprotectiondevicesdatafile, Load_Relay_Model_dic
                 if row.iloc[2] in suffixes_load_Relay:
                     suffixes_index = suffixes_load_Relay.index(row.iloc[2])
                 else:
-                        print "Error: '{}' not found in the load relay suffix list!".format(row.iloc[2])
+                    print "Error: '{}' not found in the load relay suffix list!".format(row.iloc[2])
 
                 idmodel = idmodel.replace("xx", row.iloc[2])   
                 psspy.add_load_model(bus_No,r"""{}""".format(int(row.iloc[1])),suffixes_index,2,idmodel,0,[],[],13, row.iloc[3:16].tolist())
@@ -183,7 +183,7 @@ def add_Load_Relay_Model(str_loadprotectiondevicesdatafile, Load_Relay_Model_dic
                 if row.iloc[2] in suffixes_load_Relay:
                     suffixes_index = suffixes_load_Relay.index(row.iloc[2])
                 else:
-                        print "Error: '{}' not found in the load relay suffix list!".format(row.iloc[2])
+                    print "Error: '{}' not found in the load relay suffix list!".format(row.iloc[2])
 
                 idmodel = idmodel.replace("xx", row.iloc[2])
                 psspy.add_load_model(bus_No,r"""{}""".format(int(row.iloc[1])),suffixes_index,2,idmodel,3,[0,0,0],["","",""],21, row.iloc[3:24].tolist())
@@ -197,7 +197,7 @@ def add_Load_Relay_Model(str_loadprotectiondevicesdatafile, Load_Relay_Model_dic
                 if row.iloc[2] in suffixes_load_Relay:
                     suffixes_index = suffixes_load_Relay.index(row.iloc[2])
                 else:
-                        print "Error: '{}' not found in the load relay suffix list!".format(row.iloc[2])
+                    print "Error: '{}' not found in the load relay suffix list!".format(row.iloc[2])
 
                 idmodel = idmodel.replace("xx", row.iloc[2])
                 psspy.add_load_model(bus_No,r"""{}""".format(int(row.iloc[1])),suffixes_index,2,idmodel,0,[],[],10, row.iloc[3:13].tolist())
@@ -211,7 +211,7 @@ def add_Load_Relay_Model(str_loadprotectiondevicesdatafile, Load_Relay_Model_dic
                 if row.iloc[2] in suffixes_load_Relay:
                     suffixes_index = suffixes_load_Relay.index(row.iloc[2])
                 else:
-                        print "Error: '{}' not found in the load relay suffix list!".format(row.iloc[2])
+                    print "Error: '{}' not found in the load relay suffix list!".format(row.iloc[2])
 
                 idmodel = idmodel.replace("xx", row.iloc[2])
                 psspy.add_load_model(bus_No,r"""{}""".format(int(row.iloc[1])),suffixes_index,2,idmodel,0,[],[],12, row.iloc[3:15].tolist())
@@ -225,7 +225,7 @@ def add_Load_Relay_Model(str_loadprotectiondevicesdatafile, Load_Relay_Model_dic
                 if row.iloc[2] in suffixes_load_Relay:
                     suffixes_index = suffixes_load_Relay.index(row.iloc[2])
                 else:
-                        print "Error: '{}' not found in the load relay suffix list!".format(row.iloc[2])
+                    print "Error: '{}' not found in the load relay suffix list!".format(row.iloc[2])
 
                 idmodel = idmodel.replace("xx", row.iloc[2])
                 psspy.add_load_model(bus_No,r"""{}""".format(int(row.iloc[1])),suffixes_index,2,idmodel,7,[0,0,0,0,0,0,0],["","","","","","",""],22, row.iloc[3:25].tolist())
@@ -239,7 +239,7 @@ def add_Load_Relay_Model(str_loadprotectiondevicesdatafile, Load_Relay_Model_dic
                 if row.iloc[2] in suffixes_load_Relay:
                     suffixes_index = suffixes_load_Relay.index(row.iloc[2])
                 else:
-                        print "Error: '{}' not found in the load relay suffix list!".format(row.iloc[2])
+                    print "Error: '{}' not found in the load relay suffix list!".format(row.iloc[2])
 
                 idmodel = idmodel.replace("xx", row.iloc[2])
                 psspy.add_load_model(bus_No,r"""{}""".format(int(row.iloc[1])),suffixes_index,2,idmodel,1,[0],[""],10, row.iloc[3:13].tolist())
@@ -253,7 +253,7 @@ def add_Load_Relay_Model(str_loadprotectiondevicesdatafile, Load_Relay_Model_dic
                 if row.iloc[2] in suffixes_load_Relay:
                     suffixes_index = suffixes_load_Relay.index(row.iloc[2])
                 else:
-                        print "Error: '{}' not found in the load relay suffix list!".format(row.iloc[2])
+                    print "Error: '{}' not found in the load relay suffix list!".format(row.iloc[2])
 
                 idmodel = idmodel.replace("xx", row.iloc[2])
                 psspy.add_load_model(bus_No,r"""{}""".format(int(row.iloc[1])),suffixes_index,2,idmodel,1,[0],[""],10, row.iloc[3:23].tolist())
