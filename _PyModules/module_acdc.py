@@ -1071,9 +1071,9 @@ def fun_setMTDCdyrdata(ACbusi, ACbusidi, dctypei, aloss, bloss, crect, cinv, nDC
     NS = str(max_NS)
     NV = str(max_NV)
     
-    # standard SPWDRD and SQWDRD options
+    # standard SPWDRD and SQWDRD options (SPWDRD has 3 ICONs, SQWDRD has 2)
     dyr_text_ln1 = '1 0 0'
-    dyr_text_ln2 = '0 0 0'
+    dyr_text_ln2 = '0 0'
  
     # in case of DC_TYPE = 2, add DC grid model
     if dctypei == 2:
@@ -1086,7 +1086,7 @@ def fun_setMTDCdyrdata(ACbusi, ACbusidi, dctypei, aloss, bloss, crect, cinv, nDC
     str_dynmodelinstance = '\n/ bus '+ ACbusi +' - converter\
         \n'+ ACbusi +' \'USRMDL\' '+ ACbusidi +' \'VSCGFL\'  1  1  6  24  7  29   1 1 1 '+ nDCbusi +' ' + nDClinesi + ' '+ idDCgrid +' 0.005 0.00 0.0 20.0 1.2 0.0 0.0 0.0 150.0 3000.0 1.00 500 -500 200 -200 1.10 0.90 1.31 '+ aloss +' ' + bloss + ' '+ crect +' '+ cinv +' 0.1 0.1/\
         \n'+ ACbusi +' \'USRMDL\' '+ ACbusidi +' \'SPWDRD\' 4 0 3 12 2 15 	'+ dyr_text_ln1 +' 	0.100 10.0 0.1 200.0 10.0 0.00001 0.00001 0.0001 1.0 -1.0 999.45 0.2    /\
-        \n'+ ACbusi +' \'USRMDL\' '+ ACbusidi +' \'SQWDRD\' 3 0 3 13 2 14 	'+ dyr_text_ln2 +' 	0.100 10.0 0.1 200.0 10.0 0.00001 0.00001 0.0001 0.4 -0.4 999.45 1.5 9999.0   /\
+        \n'+ ACbusi +' \'USRMDL\' '+ ACbusidi +' \'SQWDRD\' 3 0 2 10 2 11 	'+ dyr_text_ln2 +' 	0.100 10.0 0.1 200.0 0.00001 0.00001 0.4 -0.4 999.45 9999.0   /\
         '+ slack_dyr # +'\\n'+ ACbusi +' \'USRMDL\' '+ ACbusidi +' \'WDELAY\' 9 0   6 5 8 6 	1 4     5 6 11 10  0.000 0.000 0.000 0.000   0.000 /\n'
 
     return str_dynmodelinstance

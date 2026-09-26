@@ -20,7 +20,7 @@ HYACDCSIM (Hybrid AC/DC system simulator) extends PSS/E with steady-state and dy
 
 **Dynamic modelling**
 
-- Automatic generation of the data needed for dynamic simulation: the DC-grid `.txt` data files (buses, lines, incidence matrix `Ac`, admittance matrix `Ydc`) and an updated `.dyr` file containing the converter, supplementary-control and DC-grid models.
+- Automatic generation of the data needed for dynamic simulation: the DC-grid `.txt` data files (buses, lines, incidence matrix `Ac`, admittance matrix `Ydc`, impedance matrix `Zdc`) and an updated `.dyr` file containing the converter, supplementary-control and DC-grid models.
 - User-written PSS/E models (FORTRAN) in [_ForUserModels/](_ForUserModels/):
   - `VSCGFL` — grid-following VSC (generator-type, coordinated-call current-injecting model), vector control with a first-order inner current loop and PI outer loops, with P/Q limits, current limit (d-axis, q-axis or equal priority) and modulation-index limit.
   - `VSCDRO` — grid-forming VSC with angle/frequency and voltage droop (similar in structure to `REGFM_A1`).
@@ -85,7 +85,7 @@ The repository is organised around the following folders, with the three main sc
 - [_ForUserModels/](_ForUserModels/) — source of the user-written dynamic models.
 - [_PyModules/](_PyModules/) — `module_acdc.py` (set-up and solution of the sequential AC/DC power flow, results display, generation of the dynamic data files), `module_dclf.py` (DC power flow and DC-slack iteration) and `module_protection.py` (reading of the protection data sheets and addition of the relay models to the case).
 - [Input/](Input/) — one subfolder per case, with the initial `.sav` and `.dyr` files, the MTDC definition file and, where applicable, the protection data files. The [Input/DLL/](Input/DLL/) subfolder contains the compiled DLL of the user-written models.
-- [Simulation/](Simulation/) — one subfolder per case, with the automatically generated `data_Buses_base.txt`, `data_Lines_base.txt`, `data_acdcbus.txt`, `data_Ac.txt` and `data_Ydc.txt`, and with the results of the dynamic simulations (channel output file and figures). The simulation is run from this folder, so that the `.txt` files are found by the user-written models.
+- [Simulation/](Simulation/) — one subfolder per case, with the automatically generated `data_Buses_base.txt`, `data_Lines_base.txt`, `data_Ac.txt`, `data_Ydc.txt` and `data_Zdc.txt`, and with the results of the dynamic simulations (channel output file and figures). The simulation is run from this folder, so that the `.txt` files are found by the user-written models.
 
 ## Requirements
 
